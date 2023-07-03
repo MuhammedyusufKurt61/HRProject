@@ -1,0 +1,79 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRProject.Core", "HRProject.Core\HRProject.Core.csproj", "{BB4A1FAF-A756-4FC8-A056-B7E8DD3D5581}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRProject.DataAccess", "HRProject.DataAccess\HRProject.DataAccess.csproj", "{C03ED7DF-2100-428D-8FF5-0BA72726BDF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRProject.Business", "HRProject.Business\HRProject.Business.csproj", "{89D25A67-927E-4D73-8E52-2B29334E3E4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRProject.Models", "HRProject.Models\HRProject.Models.csproj", "{04A09C0F-788F-42B9-ACBA-CABF4C46824A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRProject.Entities", "HRProject.Entities\HRProject.Entities.csproj", "{07681F7C-8268-43C1-B85F-7D251AFC84B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRProject.WebUI", "HRProject.WebUI\HRProject.WebUI.csproj", "{42A46245-385C-4811-9594-9ED1C24A618D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB4A1FAF-A756-4FC8-A056-B7E8DD3D5581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB4A1FAF-A756-4FC8-A056-B7E8DD3D5581}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB4A1FAF-A756-4FC8-A056-B7E8DD3D5581}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB4A1FAF-A756-4FC8-A056-B7E8DD3D5581}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C03ED7DF-2100-428D-8FF5-0BA72726BDF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C03ED7DF-2100-428D-8FF5-0BA72726BDF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C03ED7DF-2100-428D-8FF5-0BA72726BDF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C03ED7DF-2100-428D-8FF5-0BA72726BDF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89D25A67-927E-4D73-8E52-2B29334E3E4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89D25A67-927E-4D73-8E52-2B29334E3E4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89D25A67-927E-4D73-8E52-2B29334E3E4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89D25A67-927E-4D73-8E52-2B29334E3E4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04A09C0F-788F-42B9-ACBA-CABF4C46824A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04A09C0F-788F-42B9-ACBA-CABF4C46824A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04A09C0F-788F-42B9-ACBA-CABF4C46824A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04A09C0F-788F-42B9-ACBA-CABF4C46824A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07681F7C-8268-43C1-B85F-7D251AFC84B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07681F7C-8268-43C1-B85F-7D251AFC84B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07681F7C-8268-43C1-B85F-7D251AFC84B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07681F7C-8268-43C1-B85F-7D251AFC84B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42A46245-385C-4811-9594-9ED1C24A618D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42A46245-385C-4811-9594-9ED1C24A618D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42A46245-385C-4811-9594-9ED1C24A618D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42A46245-385C-4811-9594-9ED1C24A618D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C60F71BC-942D-4D95-99C3-C255EDB6A341}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dev.azure.com/onur541
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = HRProject.Core\\HRProject.Core.csproj
+		SccProjectName1 = HRProject.Core
+		SccLocalPath1 = HRProject.Core
+		SccProjectUniqueName2 = HRProject.DataAccess\\HRProject.DataAccess.csproj
+		SccProjectName2 = HRProject.DataAccess
+		SccLocalPath2 = HRProject.DataAccess
+		SccProjectUniqueName3 = HRProject.Business\\HRProject.Business.csproj
+		SccProjectName3 = HRProject.Business
+		SccLocalPath3 = HRProject.Business
+		SccProjectUniqueName4 = HRProject.Models\\HRProject.Models.csproj
+		SccProjectName4 = HRProject.Models
+		SccLocalPath4 = HRProject.Models
+		SccProjectUniqueName5 = HRProject.Entities\\HRProject.Entities.csproj
+		SccProjectName5 = HRProject.Entities
+		SccLocalPath5 = HRProject.Entities
+		SccProjectUniqueName6 = HRProject.WebUI\\HRProject.WebUI.csproj
+		SccProjectName6 = HRProject.WebUI
+		SccLocalPath6 = HRProject.WebUI
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,117 @@
+﻿@model CreateExpenseVM;
+@using HRProject.Models.Enums;
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Personel> SignInManager
+@{
+    ViewData["Title"] = "CreateExpense";
+    Layout = "~/Areas/Personel/Views/Shared/_LayoutProfile.cshtml";
+    SelectListItem selectList = new SelectListItem(Currency.TL.ToString(), ((int)Currency.TL).ToString());
+    List<SelectListItem> selectLists = new List<SelectListItem>();
+    selectLists.Add(selectList);
+}
+<h1>HARCAMA OLUŞTURMA SAYFASI</h1>
+
+
+<div class="row">
+    <div class="col-xl-12 order-xl-1">
+        <div class="card">
+            <form method="POST" asp-controller="Personel" asp-area="Personel" asp-action="CreateExpense" enctype="multipart/form-data">
+                <div class="card-body">
+                    <h6 class="heading-small text-muted mb-4">
+                        YENİ HARCAMA OLUŞTUR
+                    </h6>
+                    <div class="pl-lg-4">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Harcama Türü</label>
+                                    <select id="type" asp-for="Type" class="form-control" asp-items="@Html.GetEnumSelectList<ExpenseType>()"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">Harcama Miktarı</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i style="color:gold" class="fa-sharp fa-solid fa-coins"></i></span>
+                                        <input type="number" asp-for=Amount class="form-control" aria-label="Amount (to the nearest dollar)">
+                                    </div>
+                                    <span asp-validation-for="Amount" class="text-danger" style="font-size:small"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label">Para Birimi</label>
+                                    <select asp-for="CurrentUnit" class="form-control" asp-items="@Html.GetEnumSelectList<Currency>()"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="formFileSm" class="form-control-label">Makbuz</label>
+                                    <input id="makbuz" class="form-control btn btn-primary" asp-for="MyFile" type="file" accept=".pdf,.jpeg" onchange="validateFileType()">
+                                    <script type="text/javascript">
+                                        function validateFileType() {
+                                            var makbuz = document.getElementById("makbuz").value;
+                                            var idxDot = makbuz.lastIndexOf(".") + 1;
+                                            var extFile = makbuz.substr(idxDot, makbuz.length).toLowerCase();
+                                            if (extFile == "pdf" || ext == "jpeg") {
+                                            } else {
+                                                alertify.error("Sadece PDF ve JPEG dosya türleri yüklenebilir.");
+                                                $('#makbuz').val('');
+                                            }
+                                        }
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-address">Açıklama</label>
+                                    <textarea rows="11" style="resize:none" asp-for="Description" class="form-control" max-height="75px"></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <button type="submit" asp-action="CreateExpense" asp-area="Personel" asp-controller="Personel" class="btn btn-success ">Kaydet</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row align-items-center">
+                        <div class="col-12 text-center">
+                            <a asp-action="ListExpense" asp-area="Personel" asp-controller="Personel" type="submit" class="btn btn-md btn-primary">
+                                Harcamalara Git
+                            </a>
+                            <a asp-controller="Personel" asp-area="Personel" asp-action="Index" type="submit" class="btn btn-md btn-success">
+                                Anasayfaya Git
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+            if ($("#error-show").val() === "Beklenmeyen bir hata olustu") {
+                alertify.error("Beklenmeyen bir hata olustu")
+            }
+        });
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+
+    <script>
+        $('#input-phonenumber').inputmask("9(999) 999-9999");
+
+        $('#makbuz').bind('change', function () {
+            if (this.files[0].size > 5242880) {
+                alertify.error('Yüklemeye çalıştığınız dosya boyutu 5Mb den küçük olmalıdır.')
+                this.value = ""
+            }
+        });
+    </script>
+}
+
+

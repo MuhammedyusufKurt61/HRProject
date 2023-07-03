@@ -1,0 +1,125 @@
+﻿@model PersonelCreateVm;
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Personel> SignInManager
+
+@{
+    Layout = "_LayoutProfile";
+    ViewData["Title"] = "Personel Ekleme";
+}
+
+<div class="row">
+    <div class="col-xl-12 order-xl-1">
+        <div class="card">
+            <form asp-controller="Manager" asp-action="Create" method="POST">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <h3 class="mb-0">EKLENECEK PERSONEL BİLGİLERİ</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="pl-lg-4 ">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-tc">TC Kimlik No</label>
+                                    <input style="background-color:white; border-color:#2dce89 #2dce89 #2dce89 #2dce89" asp-for="TC" id="input-tc" class="form-control custom-control" placeholder="Örn:12345678900">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                 <div class="form-group">
+                                    <label class="form-control-label" for="input-phonenumber">Telefon Numarası</label>
+                                    <input style="background-color:white; border-color:#2dce89 #2dce89 #2dce89 #2dce89" asp-for="PhoneNumber" type="text" id="input-phonenumber" class="form-control custom-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-firstname">Isim</label>
+                                    <input style="background-color:white; border-color:#2dce89 #2dce89 #2dce89 #2dce89" asp-for="FirstName" id="input-firstname" class="form-control custom-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-surname">Soyisim</label>
+                                    <input style="background-color:white; border-color:#2dce89 #2dce89 #2dce89 #2dce89" asp-for="Surname" type="text" id="input-surname" class="form-control custom-control">
+                                </div>
+                            </div>
+                        </div> <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-secondname">Ikinci isim</label>
+                                    <input style="background-color:white; border-color:#2dce89 #2dce89 #2dce89 #2dce89" asp-for="SecondName" id="input-secondname" class="form-control custom-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-secondsurname">Ikinci Soyisim</label>
+                                    <input style="background-color:white; border-color:#2dce89 #2dce89 #2dce89 #2dce89" asp-for="SecondSurname" type="text" id="input-secondsurname" class="form-control custom-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-birthdate">Doğum Tarihi</label>
+                                    <input style="background-color:white; border-color:#2dce89 #2dce89 #2dce89 #2dce89" asp-for="BirthDate" type="datetime" id="input-birthdate" class="form-control custom-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-birthplace">Doğum Yeri</label>
+                                    <input style="background-color:white; border-color:#2dce89 #2dce89 #2dce89 #2dce89" asp-for="BirthPlace" type="text" id="input-birthplace" class="form-control custom-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-job">Meslek</label>
+                                    <input style="background-color:white; border-color:#2dce89 #2dce89 #2dce89 #2dce89" asp-for="Job" type="text" id="input-job" class="form-control custom-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-departman">Bölüm</label>
+                                    <input style="background-color:white; border-color:#2dce89 #2dce89 #2dce89 #2dce89" asp-for="Department" type="text" id="input-departman" class="form-control custom-control">
+                                </div>                              
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-address" style="font-weight:bolder">Adres</label>
+                                    <textarea style="resize:none; border-color:#2dce89 #2dce89 #2dce89 #2dce89;" rows="6" fixed asp-for="Address" id="input-address" class="form-control custom-control" max-height="150px"></textarea>
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row align-items-center">
+                        <div class="col-12 text-center">
+                            <button asp-action="CreatePersonel" asp-area="Manager" asp-controller="Manager" type="submit" class="btn btn-md btn-primary">
+                                Personel Ekle
+                            </button>     
+                            <button asp-controller="Manager" asp-area="Manager" asp-action="Index" type="submit" class="btn btn-md btn-success">
+                                AnaSayfaya Git
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+
+    <script>
+        $('#input-phonenumber').inputmask("9(999) 999-9999");        
+    </script>
+ }

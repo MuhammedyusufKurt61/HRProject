@@ -1,0 +1,144 @@
+﻿@model PersonelDetailViewModel;
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Personel> SignInManager
+
+@{
+    Layout = "_LayoutProfile";
+    ViewData["Title"] = "Profile";
+}
+
+<div class="row">
+    <div class="col-xl-12 order-xl-1">
+        <div class="card">
+            <form asp-controller="Home" asp-action="Profile" method="POST">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <h3 class="mb-0">KULLANICI DETAY BİLGİLERİ</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="pl-lg-4 ">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item" style="font-weight:bolder">TC Kimlik No</li>
+                                                <li class="list-group-item">@Model.TC</li>
+                                            </ul>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                <div class="form-group">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item" style="font-weight:bolder">Adı ve Soyadı</li>
+                                        <li class="list-group-item">@Model.FullName</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 d-flex justify-content-end">
+                                <div class="">
+                                    <img src="~/personelImages/@Model.PhotoPath" alt="Images Not Found" class="rounded" width="175px" height="175px">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item" style="font-weight:bolder">Doğum Yeri</li>
+                                        <li class="list-group-item">@Model.BirthPlace</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item" style="font-weight:bolder">Kullanıcı Adı</li>
+                                        <li class="list-group-item">@Model.UserName</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 ">
+                                <div class="form-group ">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item" style="font-weight:bolder">Email Adresi</li>
+                                        <li class="list-group-item">@Model.Email</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item" style="font-weight:bolder">Doğum Tarihi</li>
+                                        <li class="list-group-item">@Model.BirthDate.ToString("MM/dd/yyyy")</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item" style="font-weight:bolder">Adres</li>
+                                        <li class="list-group-item">@Model.Address</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item" style="font-weight:bolder">Telefon</li>
+                                        <li class="list-group-item">@Model.PhoneNumber</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item" style="font-weight:bolder">İşe Giriş Tarihi</li>
+                                        <li class="list-group-item">@Model.ReceiptDate.ToString("MM/dd/yyyy")</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item" style="font-weight:bolder">İşten Çıkış Tarihi</li>
+                                        @if (@Model.QuitDate != null)
+                                        {
+                                            <li class="list-group-item">@Model.QuitDate.Value.ToString("MM/dd/yyyy")</li>
+                                        }
+                                        else
+                                        {
+                                            <li class="list-group-item">Aktif Çalışan</li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row align-items-center">
+                        <div class="col-12 text-center">
+                            <a asp-action="Edit" asp-area="Manager" asp-controller="Manager" type="submit" class="btn btn-md btn-primary">
+                                Güncelle
+                            </a>
+                            <a asp-controller="Manager" asp-area="Manager" asp-action="Index" type="submit" class="btn btn-md btn-success">
+                                AnaSayfaya Git
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

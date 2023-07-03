@@ -1,0 +1,216 @@
+﻿@using HRProject.Models.Enums
+@model PagedViewModel<ExpenseListItem>
+@{
+    ViewData["Title"] = "ListExpense";
+    Layout = "~/Areas/Personel/Views/Shared/_LayoutProfile.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Tables";
+}
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <!-- Card header -->
+            <div class="card-header border-0 d-flex justify-content-between">
+                <h3 class="mb-0">HARCAMA LİSTESİ</h3>
+                <a asp-action="CreateExpense" asp-area="personel" asp-controller="personel" class="btn btn-primary">Yeni Harcama Talep Et</a>
+            </div>
+            <!-- Light table -->
+            <div class="table-responsive">
+                <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col" class="sort" data-sort="name">HARCAMA TİPİ</th>
+                            <th scope="col" class="sort" data-sort="budget">MİKTAR</th>
+                            <th scope="col" class="sort" data-sort="status">PARA BİRİMİ</th>
+                            <th scope="col" class="sort" data-sort="status">İSTEK TARİHİ</th>
+                            <th scope="col" class="sort" data-sort="status">CEVAPLANMA TARİHİ</th>
+                            <th scope="col" class="sort" data-sort="completion">AÇIKLAMA</th>
+                            <th scope="col" class="sort" data-sort="status">DURUMU</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="list">
+                        @foreach (var item in Model.Results)
+                        {
+                            <tr>
+                                <td class="status">
+                                    @Html.DisplayFor(modelItem => item.Type)
+                                </td>
+                                <td class="budget">
+                                    @item.Amount
+                                </td>
+                                <td>
+                                    @item.CurrentUnit
+                                </td>
+                                <td>
+                                    @item.DemandDate.ToString("dd/MM/yyyy")
+                                </td>
+                                @if (item.ReplyDate == DateTime.MinValue && item.State == ExpenseState.Pending)
+                                {
+                                    <td>
+                                        Bekliyor
+                                    </td>
+                                }
+                                else if (item.State == ExpenseState.Cancelled || item.State == ExpenseState.Approved || item.State == ExpenseState.Rejected)
+                                {
+                                    @switch (item.State)
+                                    {
+                                        case ExpenseState.Cancelled:
+                                            <td>Iptal Edildi</td>
+                                            break;
+                                        case ExpenseState.Approved:
+                                            <td>Onaylandi</td>
+                                            break;
+                                        case ExpenseState.Rejected:
+                                            <td>Reddedildi</td>
+                                            break;
+                                    }
+                                }
+                                else
+                                {
+                                    <td>
+                                        @item.ReplyDate.ToString("dd/MM/yyyy")
+                                    </td>
+                                }
+                                <td>
+                                    @item.Description
+                                </td>
+                                <td>
+                                    @{
+                                        if (item.State == ExpenseState.Cancelled)
+                                        {
+                                                <span class="badge badge-dot mr-4">
+                                                    <i class="bg-warning"></i>
+                                                    <span class="status">İptal edildi</span>
+                                                </span>
+                                        }
+                                        else if (item.State == ExpenseState.Pending)
+                                        {
+                                                <span class="badge badge-dot mr-4">
+                                                    <i class="bg-info"></i>
+                                                    <span class="status">Onay bekliyor</span>
+                                                </span>
+                                        }
+                                        else if (item.State == ExpenseState.Rejected)
+                                        {
+                                                <span class="badge badge-dot mr-4">
+                                                    <i class="bg-danger"></i>
+                                                    <span class="status">Reddedildi</span>
+                                                </span>
+                                        }
+                                        else if (item.State == ExpenseState.Approved)
+                                        {
+                                                <span class="badge badge-dot mr-4">
+                                                    <i class="bg-success"></i>
+                                                    <span class="status">Onaylandı</span>
+                                                </span>
+                                        }
+                                    }
+                                </td>
+                                @if (item.State == ExpenseState.Pending)
+                                {
+                                    <td class="text-right">
+                                        <div class="dropdown">
+                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                <a class="dropdown-item" id="cancel" data-id="@item.Id">iptal et</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- Card footer -->
+            <div class="card-footer py-4">
+                <nav aria-label="...">
+                    <ul class="pagination justify-content-end mb-0">
+                        @if (Model.PageInfo.CurrentPage == 1)
+                        {
+                            <li class="page-item disabled">
+                                <a class="page-link" asp-action="ListExpense" asp-area="personel" asp-controller="personel" asp-route-pageNo="@(Model.PageInfo.CurrentPage-1)">
+                                    <i class="fas fa-angle-left"></i>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <a class="page-link" asp-action="ListExpense" asp-area="personel" asp-controller="personel" asp-route-pageNo="@(Model.PageInfo.CurrentPage-1)">
+                                    <i class="fas fa-angle-left"></i>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                        }
+
+                        @for (int i = 1; i <= Model.PageInfo.TotalPageCount; i++)
+                        {
+                            <li class="page-item active">
+                                <a class="page-link" asp-action="ListExpense" asp-area="personel" asp-controller="personel" asp-route-pageNo="@i">@i</a>
+                            </li>
+                        }
+                        @if (Model.PageInfo.CurrentPage == Model.PageInfo.TotalPageCount)
+                        {
+                            <li class="page-item disabled">
+                                <a class="page-link" asp-action="ListExpense" asp-area="personel" asp-controller="personel" asp-route-pageNo="@(Model.PageInfo.CurrentPage+1)">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <a class="page-link" asp-action="ListExpense" asp-area="personel" asp-controller="personel" asp-route-pageNo="@(Model.PageInfo.CurrentPage+1)">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                        }
+                        @* https://www.youtube.com/watch?v=7uNKC3pPNyo*@
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>     
+        $(document).ready(function () {
+            $("#cancel").click(function (btn) {
+                const id = $(this).data("id");
+                var path = '@Url.Content($"~/personel/harcama/iptalet?id=")'
+                alertify.confirm("İptal etmek istediğinizden emin misiniz?", function (e) {
+                    if (e) {
+                        $.ajax({
+                            url: path + id,
+                            type: 'GET',
+                            success: function (data) {
+                                history.go(0);
+                            }
+                        });
+                    } else {
+                        alertify.error("İptal etme işlemi iptal edildi");
+                        return false;
+                    }
+                }).set({title:"İptal İşlemi"});
+            });
+        });
+    </script>
+}
+

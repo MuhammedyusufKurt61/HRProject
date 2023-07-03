@@ -1,0 +1,117 @@
+﻿@model CreateAllowanceVM
+@using HRProject.Models.Enums;
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Personel> SignInManager
+@{
+    ViewData["Title"] = "CreateAllowance";
+    Layout = "~/Areas/Personel/Views/Shared/_LayoutProfile.cshtml";
+    SelectListItem selectList = new SelectListItem(Currency.TL.ToString(), ((int)Currency.TL).ToString());
+    List<SelectListItem> selectLists = new List<SelectListItem>();
+    selectLists.Add(selectList);
+}
+<h1>AVANS OLUŞTURMA SAYFASI</h1>
+
+
+<div class="row">
+    <div class="col-xl-12 order-xl-1">
+        <div class="card">
+            <input value="@ViewBag.Error" hidden id="error-show" />
+            <form method="POST" asp-controller="Personel" asp-area="Personel" asp-action="CreateAllowance">
+                <div class="card-body">
+                    <h6 class="heading-small text-muted mb-4">
+                        YENİ AVANS TALEBİ OLUŞTUR
+                    </h6>
+                    <div class="pl-lg-4">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Avans Türü</label>
+                                    <select id="type" onchange="onFirstSelectChange()" asp-for="Type" class="form-control" asp-items="@Html.GetEnumSelectList<AllowanceType>()"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">Avans Miktarı</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i style="color:gold" class="fa-sharp fa-solid fa-coins"></i></span>
+                                        <input type="number" asp-for=Amount class="form-control" aria-label="Amount (to the nearest dollar)" min="1000" max="100000">
+                                    </div>
+                                    <span asp-validation-for="Amount" class="text-danger" style="font-size:small"></span>
+                                </div>
+
+                                <div class="form-group">
+                                        <label class="form-control-label">Para Birimi</label>
+                                        <select id="currency" asp-for="CurrentUnit" class="form-control"></select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-address">Açıklama</label>
+                                    <textarea rows="11" style="resize:none" asp-for="Description" class="form-control" max-height="150px"></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <button type="submit" asp-action="CreateAllowance" asp-area="Personel" asp-controller="Personel" class="btn btn-outline-primary">Kaydet</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <div class="row align-items-center">
+                        <div class="col-12 text-center">
+                            <a asp-action="ListAllowance" asp-area="Personel" asp-controller="Personel" type="submit" class="btn btn-md btn-primary">
+                                Avanslara Git
+                            </a>
+                            <a asp-controller="Personel" asp-area="Personel" asp-action="Index" type="submit" class="btn btn-md btn-success">
+                                Anasayfaya Git
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+
+        function onFirstSelectChange() {
+            // Get the selected value of the first select input
+            var type = document.getElementById("type").value;
+
+            // Make an AJAX request to the server to get the data for the second select input
+            $.ajax({
+                url: 'https://humanresourceteamoneapp.azurewebsites.net/GetSecondSelectData',
+                type: 'POST',
+                data: { type: type },
+                success: function (data) {
+                    // Clear the current options of the second select input
+                    $("#currency").empty();
+
+                    // Add the new options to the second select input
+                    $.each(data, function (index, item) {
+                        $("#currency").append(new Option(item.text, item.value));
+                    });
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            if ($("#error-show").val() === "Bireysel Avanslarda Yabancı Para Birimi Kullanılamaz.") {
+                alertify.error("Bireysel Avanslarda Yabancı Para Birimi Kullanılamaz.")
+            }
+            else if ($("#error-show").val() === "Bireysel Avans Limitiniz Yeterli Değildir.") {
+                alertify.error("Bireysel Avans Limitiniz Yeterli Değildir.")
+            }
+            else if ($("#error-show").val() === "Beklenmeyen bir hata olustu") {
+                alertify.error("Beklenmeyen bir hata olustu")
+            }
+
+            onFirstSelectChange();
+        });
+    </script>
+}
+

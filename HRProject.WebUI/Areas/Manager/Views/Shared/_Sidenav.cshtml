@@ -1,0 +1,90 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Personel> SignInManager
+
+
+<!-- Sidenav -->
+<nav class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+
+    <div class="scrollbar-inner">
+
+        <!-- Brand -->
+        <div class="sidenav-header  align-items-center">
+            <a asp-controller="Manager" asp-area="Manager" asp-action="index" class="navbar-brand">
+                <img src="~/img/brand/logo.png" class="navbar-brand-img" alt="...">
+            </a>
+        </div>
+        <div class="navbar-inner">
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+
+                <!-- Collapse header -->
+                <div class="navbar-collapse-header d-md-none">
+                    <div class="row">
+                        <div class="col-6 collapse-brand">
+                            <a disabled href="/">
+                                <img src="~/img/brand/blue.png">
+                            </a>
+                        </div>
+                        <div class="col-6 collapse-close">
+                            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Manager" asp-controller="Manager" asp-action="Index">
+                            <i class="ni ni-tv-2 text-primary"></i> Ana Sayfa
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Manager" asp-controller="Manager" asp-action="Details">
+                            <i class="ni ni-single-02 text-yellow"></i> Detay Sayfası
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Manager" asp-controller="Manager" asp-action="Edit">
+                            <i class="ni ni-settings-gear-65  text-purple"></i> Güncelle
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardropdownmenulink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ni ni-ungroup text-gray-dark"></i> Talepler</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="#"><i class="ni ni-archive-2 text-orange"></i>Avans Talepleri</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-area="Manager" asp-controller="Manager" asp-action="AllowanceList"><i class="ni ni-bullet-list-67 text-green"></i>Avansları Yönet</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="#"><i class="ni ni-basket text-yellow"></i>Harcama Talepleri</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-area="Manager" asp-controller="Manager" asp-action="ExpenseList"><i class="fa-sharp fa-solid fa-money-check-dollar text-blue"></i>Harcamaları Yönet</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="#"><i class="ni ni-circle-08 text-green "></i>Personel İşlemleri</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-area="Manager" asp-controller="Manager" asp-action="CreatePersonel"><i class="ni ni-fat-add text-green"></i>Personel Ekle</a></li>
+                                    <li><a class="dropdown-item" asp-area="Manager" asp-controller="Manager" asp-action="GetPersonelList"><i class="ni ni-badge text-darker"></i>Personelleri Listele</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <hr class="my-3">
+            </div>
+        </div>
+    </div>
+</nav>
+
+@*
+<a class="nav-item dropdown-toggle" id="navbardropdownmenulink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><i class="ni ni-ungroup text-gray-dark"></i> Talepler</a>
+<ul class="dropdown-menu">
+
+   
+</ul>*@
+                    \

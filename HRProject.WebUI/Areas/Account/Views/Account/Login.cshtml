@@ -1,0 +1,67 @@
+﻿@model PersonelLoginVM
+@{
+    Layout = "_LoginLayout";
+}
+
+
+<div class="row justify-content-center">
+    <div class="col-md-6 text-center mb-5">
+        <h2 class="heading-section"></h2>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="login-wrap p-0">
+            <h3 class="mb-4 text-center" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight:500; font-size:x-large">HOŞGELDİNİZ</h3>
+            <form method="post" asp-controller="Account" asp-area="Account" asp-action="Login" class="signin-form">
+                <div class="form-group">
+                    <input type="text" asp-for="Email" class="form-control" placeholder="Email" required>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Password" id="password-field" type="password" class="form-control" placeholder="Şifre" required>
+                    <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group d-flex justify-content-center">
+                    @{
+                        if (ViewBag.ErrorMessage != null)
+                        {
+                            <p class="text-danger" style="font-size:medium"><strong>@ViewBag.ErrorMessage.ToString()</strong></p>
+                        }
+                    }
+                </div>
+                <div class="form-group justify-content-center d-flex">
+                    <button class="button-82-pushable" role="button" asp-action="Login" asp-area="Account" asp-controller="Account" style="" type="submit">
+                        <span class="button-82-shadow"></span>
+                        <span class="button-82-edge"></span>
+                        <span class="button-82-front text">
+                            GİRİŞ YAP
+                        </span>
+                    </button>
+                </div>
+                <div class="form-group d-md-flex">
+                    <div class="w-50 text-md-left">
+                        <a id="change-pass" asp-area="Account" asp-controller="Account" asp-action="ChangePassword" style="color: #fff; transition:0.1s;">Şifremi Değiştir</a>
+                    </div>
+                    <div class="w-50 text-md-right">
+                        <a id="forget-pass" asp-action="ForgetPassword" asp-area="Account" asp-controller="Account" style="color: #fff;transition:0.1s;">Şifremi Unuttum</a>
+                    </div>
+                </div>
+            </form>
+            <script>
+                $(document).ready(function () {
+                    if ($("#error-show").val() === "Şifreniz değiştirildi, lütfen emailinizi kontrol ediniz.") {
+                        alertify.success("Şifreniz değiştirildi, lütfen emailinizi kontrol ediniz.")
+                    }
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

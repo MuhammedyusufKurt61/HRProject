@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <partial name="_PageHeadElement" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @RenderSection("Styles", required: false)
+    @RenderSection("HeadScripts", required: false)
+    <style>
+        .dropdown-submenu {
+            position: relative;
+        }
+
+            .dropdown-submenu a::after {
+                transform: rotate(-90deg);
+                position: absolute;
+                right: 6px;
+                top: .8em;
+            }
+
+            .dropdown-submenu .dropdown-menu {
+                top: 0;
+                left: 100%;
+                margin-left: .1rem;
+                margin-right: .1rem;
+            }
+    </style>
+</head>
+<body class="g-sidenav-show">
+    <partial name="_GoogleTagManagerBodyElement" />
+
+    <partial name="_Sidenav" />
+    <div class="main-content" id="panel">
+
+        <partial name="Topnav/_TopnavProfile" />
+        <!-- Header -->
+
+        <div class="header pb-6 d-flex align-items-center" style="min-height: 200px; background-image:url('@Url.Content("~/img/theme/img-1-1000x600.jpg")'); background-size: cover; background-position: center top;">
+            <!-- Mask -->
+            <span class="mask bg-gradient-default opacity-2"></span>
+            <!-- Header container -->
+            <div class="container-fluid d-flex align-items-center">
+                <div class="row">
+                    <div class="col-lg-7 col-md-10">
+                        @*<h1 class="display-2 text-white">Merhaba, @ViewBag.FullName</h1>
+                        <p class="text-white mt-0 mb-5">
+                        Burasý senin profil sayfan. Burada ilerlemelerini görebilir, projelerini yönetebilir ve sana atanmýþ görevlerin üzerinde çalýþabilirsin.
+                        </p>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Header -->
+        <!-- Page content -->
+        <div class="container-fluid mt--6">
+            <!-- Page content -->
+            @RenderBody()
+        </div>
+    </div>
+
+    <partial name="_ThemeScripts" />
+
+    @RenderSection("Scripts", required: false)
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</body>
+</html>
